@@ -53,7 +53,7 @@ def get_category_urls(session):
     links = {}
     for a in soup.select("div.side_categories ul li ul li a"):
         name = a.text.strip()
-        href = urljoin(BASE_URL, a["herf"])
+        href = urljoin(BASE_URL, a["href"])
         links[name] = href
     return links
 
