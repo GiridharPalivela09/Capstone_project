@@ -111,6 +111,7 @@ def scrape_all(min_books = MIN_BOOKS, categories = CATEGORIES_TO_SCRAPE):
             "Add more categories to CATEGORIES_TO_SCRAPE."
         )
     return all_books
+<<<<<<< HEAD:data_pipeline/Scrape.py
 
 def main():
     print("Scraping books.toscrape.com ...")
@@ -124,3 +125,5 @@ def main():
 if __name__ == "__main__":
     main()
     
+=======
+>>>>>>> b477bdad602d808bae8b9b085b381ac401bc4611:data_pipeline.py
