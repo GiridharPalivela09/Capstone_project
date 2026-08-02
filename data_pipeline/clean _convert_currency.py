@@ -2,7 +2,7 @@ import re
 import pandas as pd
 import os
 
-import os
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_CSV_PATH = os.path.join(BASE_DIR, "books_raw.csv")
