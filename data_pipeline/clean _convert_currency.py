@@ -22,7 +22,10 @@ def parse_price(price_text):
         return None
     
 def parse_rating(rating_word):
-    return RATING.get(str(rating_word).strip(), None)
+    try:
+        return int(rating_word)
+    except (ValueError, TypeError):
+        return None
 
 def parse_availability(availability_text):
     text = str(availability_text).lower()
@@ -56,8 +59,17 @@ def clean_dataframe(raw_df):
             print(f" median-imputed {n_missing} value(s) in '{col}"
                   f" with median = {median_value}")
     
-    df["rating"] = df["rating"].fillna(0)
-    df["rating"] = df["rating"].round().astype(int)
+    df["rating"] = df["star_rating"].apply(parse_rating)
+    ...
+    for col in ["price_gbp", "rating"]:
+        n_missing = df[col].isna().sum()
+        if n_missing:
+            median_value = df[col].median()
+            df[col] = df[col].fillna(median_value)
+            print(f" median-imputed {n_missing} value(s) in '{col}"
+                  f" with median = {median_value}")
+
+    df["rating"] = df["rating"].astype(int)
     df["in_stock"] = df["in_stock_raw"].astype(bool)
     df["price_inr"] = (df["price_gbp"] * rate).round(2)
     
@@ -68,7 +80,7 @@ def clean_dataframe(raw_df):
 def main():
     raw_df = pd.read_csv(RAW_CSV_PATH)
     print(f"Loaded {len(raw_df)} raw rows from {RAW_CSV_PATH}\n")
- 
+    print(raw_df["star_rating"].unique())
     print("Cleaning ...")
     clean_df = clean_dataframe(raw_df)
  
@@ -76,7 +88,9 @@ def main():
     print(f"\nSaved {len(clean_df)} cleaned rows -> {CLEAN_CSV_PATH}")
     print(clean_df.dtypes)
     print(clean_df.head(3).to_string(index=False))
+    
  
  
 if __name__ == "__main__":
     main()
+
