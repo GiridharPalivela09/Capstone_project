@@ -36,7 +36,7 @@ MIN_BOOKS = 60
 
 RATING = {"One":1, "Two":2, "Three":3, "Four":4, "Five" : 5}
 
-DB_PATH = "books_catalog.db"
+RAW_CSV_PATH = "books_raw.csv"
 
 
 #========================================================================================================
@@ -111,3 +111,16 @@ def scrape_all(min_books = MIN_BOOKS, categories = CATEGORIES_TO_SCRAPE):
             "Add more categories to CATEGORIES_TO_SCRAPE."
         )
     return all_books
+
+def main():
+    print("Scraping books.toscrape.com ...")
+    raw_books = scrape_all()
+    raw_df = pd.DataFrame(raw_books)
+    raw_df.to_csv(RAW_CSV_PATH, index=False)
+    print(f"\nSaved {len(raw_df)} rows -> {RAW_CSV_PATH}")
+    print(raw_df.head(3).to_string(index=False))
+ 
+ 
+if __name__ == "__main__":
+    main()
+    
