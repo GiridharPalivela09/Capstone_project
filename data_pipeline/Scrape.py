@@ -111,8 +111,6 @@ def scrape_all(min_books = MIN_BOOKS, categories = CATEGORIES_TO_SCRAPE):
             "Add more categories to CATEGORIES_TO_SCRAPE."
         )
     return all_books
-<<<<<<< HEAD:data_pipeline/Scrape.py
-
 def main():
     print("Scraping books.toscrape.com ...")
     raw_books = scrape_all()
@@ -120,10 +118,7 @@ def main():
     raw_df.to_csv(RAW_CSV_PATH, index=False)
     print(f"\nSaved {len(raw_df)} rows -> {RAW_CSV_PATH}")
     print(raw_df.head(3).to_string(index=False))
- 
- 
+
+
 if __name__ == "__main__":
     main()
-    
-=======
->>>>>>> b477bdad602d808bae8b9b085b381ac401bc4611:data_pipeline.py
