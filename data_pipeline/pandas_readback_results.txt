@@ -1,0 +1,21 @@
+Q1 (pd.read_sql):
+Empty DataFrame
+Columns: [title, price_gbp, rating]
+Index: []
+
+Q6 (pd.read_sql):
+Empty DataFrame
+Columns: [category_name, num_books, avg_price_inr]
+Index: []
+
+Q5 via SQL JOIN (pd.read_sql):
+Empty DataFrame
+Columns: [title, price_inr, rating, category_name]
+Index: []
+
+Q5 reproduced via pd.merge on in-memory DataFrames:
+Empty DataFrame
+Columns: [title, price_inr, rating, category_name]
+Index: []
+
+pd.merge result matches SQL JOIN result exactly: True
